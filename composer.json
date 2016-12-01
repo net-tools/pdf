@@ -1,0 +1,29 @@
+{
+    "name" : "net-tools/pdf",
+	
+    "description" : "Composer library for handling PDF files through TCPDF lib",
+	
+	"type": "library",
+	
+	"require" : {
+		"php": ">= 7.0.0",
+        "tecnickcom/tcpdf" : "^6.2.12"
+    },
+	
+	"autoload": {
+		"psr-4": {
+			"Nettools\\Pdf\\": "src/"
+		}
+    },
+	 
+    "license" : "MIT",
+
+    "authors": [
+        {
+            "name": "Pierre",
+            "email": "dev@net-tools.ovh",
+            "role": "Developer"
+        }
+    ]
+
+}
