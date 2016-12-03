@@ -32,7 +32,6 @@ To create the document, just use HTML tags and simple CSS formatting (with `addH
 ### Sample 
 
 ```php
-<?php
 $pdfh = new \Nettools\Pdf\PdfHelper($cfgfile, 'P', 'Me', 'Dummy title');
 $pdfh->addHTMLPage("<p><strong>This is a simple PDF file</strong></p><p>with two lines. First is bold, the second is in normal print.</p>");
 $pdfh->output($path_to_file_to_be_created);
