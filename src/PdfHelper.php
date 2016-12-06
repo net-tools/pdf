@@ -1,23 +1,59 @@
 <?php
 
+
+/**
+ * Helper class to create PDF files with TCPDF lib
+ * 
+ * @see https://packagist.org/packages/tecnickcom/tcpdf
+ *
+ */
+
 // namespace
 namespace Nettools\Pdf;
 
 
-
-// helper class to create PDF files with TCPDF lib 
 class PdfHelper{
 	
-	protected $_pdf = NULL;
+    /**
+     * TCPDF instance
+     */
+    protected $_pdf = NULL;
+    
+    /**
+     * Encoding set before creating the TCPDF ; used to restore the user encoding after processing
+     * 
+     * @var string
+     */
 	protected $_encoding = NULL;
 	
 
-	// constants
+	/**
+     * Constant for Portrait orientation
+     *
+     * @var string
+     */
 	const ORIENTATION_PORTRAIT = 'P';
-	const ORIENTATION_LANDSCAPE = 'L';	
+
+
+    /**
+     * Constant for Landscape orientation
+     *
+     * @var string
+     */
+    const ORIENTATION_LANDSCAPE = 'L';	
 	
 
-	// constructor
+	/**
+     * Constructor
+     *
+     * @param string $configfile Path to an external TCPDF config file to use
+     * @param string $orientation One of the orientation constant (@see PdfHelper::ORIENTATION_PORTRAIT or PdfHelper::ORIENTATION_LANDSCAPE)
+     * @param string $author Author of PDF document ; will appear in the PDF document properties
+     * @param string $title Title of PDF document ; will appear in the PDF document properties
+     * @param string $subject Subject of PDF document ; will appear in the PDF document properties
+     * @param int $fontsize Default font-size
+     * @param string $fontname Default font family
+     */
 	public function __construct($configfile, $orientation, $author, $title, $subject = '', $fontsize = 10, $fontname = 'helvetica')
 	{
 		// tcpdf being installed through composer, the config file must be included here
@@ -55,14 +91,24 @@ class PdfHelper{
 	}
 	
 	
-	// get TCPDF instance
+	/**
+     * Get TCPDF instance
+     * 
+     * @return \TCPDF
+     */
 	public function getPdf()
 	{
 		return $this->_pdf;
 	}
 	
 
-	// set header (logo and two lines)
+	/** 
+     * Set header (logo and two lines)
+     *
+     * @param string $logo Path to a logo to display in the header margin
+     * @param string $header1 First line of text to print in the header
+     * @param string $header2 Second line of text to print in the header
+     */
 	public function setHeader($logo, $header1, $header2)
 	{
 		// set default header data
@@ -81,7 +127,11 @@ class PdfHelper{
 	}
 	
 	
-	// page break auto ?
+	/**
+     * Set auto page break automatic or not
+     *
+     * @param bool $b
+     */
 	public function setAutoPageBreak($b)
 	{
 		if ( $b )
@@ -91,14 +141,20 @@ class PdfHelper{
 	}
 	
 	
-	// new page (blank), must be followed by writeHTML
+	/**
+     * Create a new page (blank), must be followed by @see PdfHelper::writeHTML
+     */
 	public function addPage()
 	{
 		$this->_pdf->addPage();
 	}
 	
 	
-	// create a new page with html content
+	/** 
+     * Create a new page with html content
+     *
+     * @param string $html HTML content to add to the PHP document
+     */
 	public function addHTMLPage($html)
 	{
 		$this->addPage();
@@ -106,7 +162,11 @@ class PdfHelper{
 	}
 	
 	
-	// write html in the current page
+	/**
+     * Add html content to the current page
+     * 
+     * @param string $html HTML content to add
+     */
 	public function writeHTML($html)
 	{
 		// output the HTML content
@@ -117,7 +177,12 @@ class PdfHelper{
 	}
 	
 	
-	// output PDF file ; dest=F (file), I (inline), D (download) 
+	/** 
+     * Output PDF file
+     * 
+     * @param string $filename Path to file to create
+     * @param string $dest Export method : dest=F (file), I (inline), D (download)
+     */
 	public function output($filename, $dest = 'F')
 	{
 		//Close and output PDF document
