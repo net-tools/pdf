@@ -1,21 +1,20 @@
 <?php
 
+// namespace
+namespace Nettools\Pdf;
+
 
 /**
  * Helper class to create PDF files with TCPDF lib
  * 
  * @see https://packagist.org/packages/tecnickcom/tcpdf
- *
  */
-
-// namespace
-namespace Nettools\Pdf;
-
-
 class PdfHelper{
 	
     /**
      * TCPDF instance
+     * 
+     * @var \TCPDF
      */
     protected $_pdf = NULL;
     
@@ -130,7 +129,7 @@ class PdfHelper{
 	/**
      * Set auto page break automatic or not
      *
-     * @param bool $b
+     * @param bool $b True to enable auto page break, false otherwise (content may overflow)
      */
 	public function setAutoPageBreak($b)
 	{
